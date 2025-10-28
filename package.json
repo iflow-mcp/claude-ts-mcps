@@ -1,5 +1,5 @@
 {
-  "name": "claude-ts-mcps",
+  "name": "@iflow-mcp/claude-ts-mcps",
   "type": "module",
   "note": {
     "reference": "https://modelcontextprotocol.io/quickstart/server"
