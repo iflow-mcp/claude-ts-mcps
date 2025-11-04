@@ -1,10 +1,18 @@
 {
   "name": "@iflow-mcp/claude-ts-mcps",
+  "version": "1.0.1",
   "type": "module",
+  "main": "./dist/index.js",
+  "bin": {
+    "claude-ts-mcps": "./dist/index.js"
+  },
   "note": {
     "reference": "https://modelcontextprotocol.io/quickstart/server"
   },
   "scripts": {
+    "build": "tsc",
+    "start": "node ./dist/index.js",
+    "dev": "tsc --watch",
     "type-check": "tsc --noEmit",
     "type-check:watch": "tsc --noEmit --watch",
     "type-check:strict": "tsc --noEmit --strict",
@@ -17,7 +25,8 @@
     "format:src": "prettier --write 'src/**/*.{ts,js,json}'",
     "format:check:src": "prettier --check 'src/**/*.{ts,js,json}'",
     "lint": "bun run format:check && bun run type-check",
-    "lint:fix": "bun run format && bun run type-check"
+    "lint:fix": "bun run format && bun run type-check",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@types/bun": "latest",
@@ -33,8 +42,5 @@
     "minimatch": "^10.0.1",
     "puppeteer": "^22.3.0",
     "zod": "^3.24.2"
-  },
-  "bin": {
-    "puppeteer-mcp": "./src/puppeteer/index.ts"
   }
 }
