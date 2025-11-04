@@ -163,8 +163,8 @@ export class ShellExecutor {
       // 出力バッファを初期化
       const stdoutBuffer = createOutputBuffer();
       const stderrBuffer = createOutputBuffer();
-      let timeoutId: NodeJS.Timeout | Timer | null = null;
-      let streamingTimeoutId: NodeJS.Timeout | Timer | null = null;
+      let timeoutId: NodeJS.Timeout | null = null;
+      let streamingTimeoutId: NodeJS.Timeout | null = null;
       let processExited = false;
       let resultReturned = false;
 

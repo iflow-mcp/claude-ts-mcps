@@ -14,16 +14,21 @@
  * - URL content fetching
  */
 
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 import { z } from "zod";
 
 /**
  * Initialize the main MCP server
  */
-const server = new McpServer({
+const server = new Server({
   name: "claude-ts-mcps",
-  version: "1.0.1",
+  version: "1.0.2",
+}, {
+  capabilities: {
+    tools: {},
+  },
 });
 
 /**
@@ -42,8 +47,8 @@ const config = {
 /**
  * Brave Web Search Tool
  */
-server.setRequestHandler("tools/call", async (request) => {
-  const { name, arguments: args } = request.params;
+server.setRequestHandler(CallToolRequestSchema, async (request) => {
+  const { name, arguments: args } = (request as any).params;
 
   switch (name) {
     case "brave_web_search": {
@@ -202,7 +207,7 @@ server.setRequestHandler("tools/call", async (request) => {
 /**
  * List available tools
  */
-server.setRequestHandler("tools/list", async () => {
+server.setRequestHandler(ListToolsRequestSchema, async () => {
   return {
     tools: [
       {

@@ -766,8 +766,8 @@ async function applyFileEdits(
     // 各編集タイプに応じた処理
     if (edit.type === "replace" || !edit.type) {
       // 既存のテキスト置換処理
-      const normalizedOld = normalizeLineEndings(edit.oldText);
-      const normalizedNew = normalizeLineEndings(edit.newText);
+      const normalizedOld = normalizeLineEndings((edit as any).oldText);
+      const normalizedNew = normalizeLineEndings((edit as any).newText);
 
       // If exact match exists, use it
       if (modifiedContent.includes(normalizedOld)) {
@@ -812,7 +812,7 @@ async function applyFileEdits(
       }
 
       if (!matchFound) {
-        throw new Error(`Could not find exact match for edit:\n${edit.oldText}`);
+        throw new Error(`Could not find exact match for edit:\n${(edit as any).oldText}`);
       }
     } else if (edit.type === "line") {
       // 行番号ベースの編集

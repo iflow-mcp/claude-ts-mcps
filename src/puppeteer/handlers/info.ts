@@ -120,7 +120,8 @@ export async function handleGetElementInfo(
         };
 
         // 属性を収集
-        for (const attr of el.attributes) {
+        for (let i = 0; i < el.attributes.length; i++) {
+          const attr = el.attributes[i];
           info.attributes[attr.name] = attr.value;
         }
 
